@@ -20,15 +20,16 @@
     <a class="link" id="div4" href="/4">go to 4</a>
 
     <div id="app">
-        <div id="div404" style="display: none;">
-            当前页面被狗吃了
-        </div>
+
+    </div>
+
+    <div id="div404" style="display: none;">
+        当前页面被狗吃了
     </div>
 
 </body>
-
-
 <script>
+
     const app = document.querySelector('#app')
 
     const div1 = document.createElement("div")
@@ -48,10 +49,10 @@
     }
 
     function route(container) {
-        let number = window.location.pathname
+        let number = window.localStorage.getItem("xxx");
         console.log('number:' + number)
 
-        if (number === "/router.html") {
+        if (!number) {
             number = "/1";
         }
 
@@ -72,20 +73,18 @@
         a.addEventListener("click", e => {
             e.preventDefault();
             const href = a.getAttribute("href");
-            window.history.pushState(null, `page ${href}`, href);
+            window.localStorage.setItem("xxx", href);
             // 通知
             onStateChange(href);
         });
     }
+
 
     route(app)
 
     function onStateChange() {
         console.log("state 变了");
         route(app);
-    }
-
-
-</script>
+    }</script>
 
 </html>
